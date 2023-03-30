@@ -3,4 +3,5 @@ spring.datasource.url=<<database>>
 spring.datasource.username=<<user>>
 spring.datasource.password=<<password>>
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+server.port=3002
 #spring.jpa.show-sql: true
