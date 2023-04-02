@@ -1,7 +1,9 @@
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=<<database>>
-spring.datasource.username=<<user>>
-spring.datasource.password=<<password>>
+lspring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=${APPLICATION_DATABASE}
+spring.datasource.username=${APPLICATION_DATABASE_USER}
+spring.datasource.password=${APPLICATION_DATABASE_USER_PASS}
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-server.port=3002
+server.port=${APPLICATION_PORT}
+#Allows for Capital first letter names of tables
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 #spring.jpa.show-sql: true
