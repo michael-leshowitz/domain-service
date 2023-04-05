@@ -6,13 +6,13 @@ import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import cookbook.domainservice.recipe_service.service_impl.entities.Recipe;
+import cookbook.domainservice.recipe_service.service_impl.entities.RecipeEntity;
 
 @Repository
-public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
+public interface RecipeRepository extends CrudRepository<RecipeEntity, Integer> {
     
     @Query(value = "SELECT * FROM Recipe WHERE "
         + "MATCH(name) "
         + "AGAINST (?1)")
-    public List<Recipe> fullTextByKeyword(String keyword);
+    public List<RecipeEntity> fullTextByKeyword(String keyword);
 }

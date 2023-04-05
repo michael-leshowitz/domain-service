@@ -1,6 +1,6 @@
 package cookbook.domainservice.recipe_service.api.models;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,5 +12,5 @@ public class Recipe {
     private String name;
     // TODO: Implement User services
     // private User owner;
-    private ArrayList<ActiveRecipeIngredient> steps;
+    private Set<ActiveRecipeIngredient> steps;
 }

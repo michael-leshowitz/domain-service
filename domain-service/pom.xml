@@ -20,6 +20,13 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>com.windpanda.jmapper-framework</groupId>
+			<artifactId>jmapper-core</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+
+
+		<dependency>
 			<groupId>com.rainingsince</groupId>
 			<artifactId>spring-data-elasticsearch</artifactId>
 			<version>0.1.1</version>
