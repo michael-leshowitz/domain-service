@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 public class CookingAction {
     private Integer id;
     private Appliance appliance;
-    private Integer duration;
+    private Integer duration_min;
     private String description;
 }
