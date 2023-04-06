@@ -1,6 +1,6 @@
 package cookbook.domainservice.recipe_service.service_impl.entities;
 
-import cookbook.domainservice.ingredient_service.service_impl.entities.Grocery;
+import cookbook.domainservice.ingredient_service.service_impl.entities.GroceryEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ public class ActiveIngredientEntity {
     
     @ManyToOne
     @JoinColumn(name = "idGrocery")
-    private Grocery grocery;
+    private GroceryEntity grocery;
     
     @ManyToOne
     @JoinColumn(name = "idMeasurement")

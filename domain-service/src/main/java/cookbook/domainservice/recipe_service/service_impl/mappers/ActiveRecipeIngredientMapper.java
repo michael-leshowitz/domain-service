@@ -1,4 +1,4 @@
-package cookbook.domainservice.recipe_service.service_impl.mapper;
+package cookbook.domainservice.recipe_service.service_impl.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

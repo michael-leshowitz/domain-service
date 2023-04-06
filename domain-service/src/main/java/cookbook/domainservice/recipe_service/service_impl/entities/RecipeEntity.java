@@ -26,5 +26,5 @@ public class RecipeEntity {
     // private Integer owner;
 
     @OneToMany(mappedBy="recipe")
-    private Set<ActiveRecipeIngredientEntity> activeIngredient;
+    private Set<ActiveRecipeIngredientEntity> steps;
 }

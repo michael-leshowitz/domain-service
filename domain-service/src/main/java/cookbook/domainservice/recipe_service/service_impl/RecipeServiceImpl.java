@@ -12,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
 
-    private final RecipeRepository recipeRepository;
-
     public List<Recipe> searchRecipesByKeyword(String keyword) {
         List<Recipe> placeholder = new ArrayList<Recipe>();
         return placeholder;

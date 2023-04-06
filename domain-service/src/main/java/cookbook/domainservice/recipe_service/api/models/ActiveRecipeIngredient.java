@@ -9,4 +9,5 @@ public class ActiveRecipeIngredient {
     private ActiveIngredient ingredient;
     private Integer step;
     private CookingAction action;
+    private Recipe recipe;
 }
