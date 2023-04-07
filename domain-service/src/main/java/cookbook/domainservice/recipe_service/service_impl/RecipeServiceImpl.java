@@ -6,22 +6,21 @@ import org.springframework.stereotype.Service;
 import cookbook.domainservice.recipe_service.api.RecipeService;
 import cookbook.domainservice.recipe_service.api.models.Recipe;
 import cookbook.domainservice.recipe_service.service_impl.repositories.RecipeRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Builder;
 
 @Service
+@Builder
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
+
+    @NonNull private final RecipeRepository recipeRepository;
 
     public List<Recipe> searchRecipesByKeyword(String keyword) {
         List<Recipe> placeholder = new ArrayList<Recipe>();
         return placeholder;
     }
-    // Maps go from Entity to domain model 
-    // JMapper<Recipe, RecipeEntity> recipeMapper = new JMapper<>(Recipe.class, RecipeEntity.class);
-    // public List<Recipe> searchRecipesByKeyword(String keyword) {
-    //     return recipeRepository.fullTextByKeyword(keyword).stream()
-    //         .map(recipeEntity -> recipeMapper.getDestination(recipeEntity))
-    //         .collect(Collectors.toList());
-    // }
-    
+    // Mapping from entity to model
+    // RecipeMapper.Instance.entityToModle(...)
 }

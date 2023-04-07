@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import cookbook.domainservice.tag_management_service.api.models.Tag;
 import cookbook.domainservice.tag_management_service.service_impl.entities.TagEntity;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TagMapper {
    
     Tag entityToModel(TagEntity tagEntity);

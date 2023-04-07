@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cookbook.domainservice.recipe_service.api.RecipeService;
 import cookbook.domainservice.recipe_service.api.models.Recipe;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -16,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RecipeController {    
 
-    private final RecipeService recipeService;
+    @NonNull private final RecipeService recipeService;
     
     @GetMapping(path="/query-by")
     public List<Recipe> fullTextByKeyword(@RequestParam String searchText) {
