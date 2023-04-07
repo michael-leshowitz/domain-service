@@ -5,14 +5,16 @@ import org.springframework.context.annotation.Configuration;
 
 import cookbook.domainservice.recipe_service.api.RecipeService;
 import cookbook.domainservice.recipe_service.service_impl.RecipeServiceImpl;
+import cookbook.domainservice.recipe_service.service_impl.mappers.RecipeMapper;
 import cookbook.domainservice.recipe_service.service_impl.repositories.RecipeRepository;
 
 @Configuration
 public class RecipeServiceConfig {
     @Bean
     public RecipeService recipeService(
-        RecipeRepository recipeRepository
+        RecipeRepository recipeRepository,
+        RecipeMapper recipeMapper
     ) {
-        return new RecipeServiceImpl(recipeRepository);
+        return new RecipeServiceImpl(recipeRepository, recipeMapper);
     }
 }

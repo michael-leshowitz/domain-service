@@ -2,14 +2,14 @@ package cookbook.domainservice.recipe_service.service_impl.controllers;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+// import org.springframework.context.annotation.Import;
 
 import cookbook.domainservice.recipe_service.api.RecipeService;
 
 @Configuration
-@Import(RecipeControllerConfig.class)
+// @Import(RecipeControllerConfig.class)
 public class RecipeControllerConfig {
-    @Bean
+    
     public RecipeController recipeController(RecipeService recipeService) {
         return new RecipeController(recipeService);
     }

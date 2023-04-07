@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -23,8 +24,9 @@ public class RecipeEntity {
     private String name;
 
     // TODO: Update to a one-to-one mapping once user services is implemented
-    // private Integer owner;
+    private Integer owner;
 
-    @OneToMany(mappedBy="recipe")
+    @OneToMany
+    @JoinColumn(name="RecipeId", nullable = false)
     private Set<ActiveRecipeIngredientEntity> steps;
 }

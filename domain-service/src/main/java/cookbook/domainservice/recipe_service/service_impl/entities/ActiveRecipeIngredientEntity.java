@@ -14,19 +14,20 @@ import lombok.Data;
 @Data
 @Table(name = "ActiveRecipeIngredient")
 public class ActiveRecipeIngredientEntity implements Serializable {
-    // Note: No repository needed for this, Active recipe ingredients don't have value on own
 
     private Integer step;
 
     @Id
     @ManyToOne
-    @JoinColumn(name="idRecipe", nullable = false)
+    @JoinColumn(name="RecipeId", nullable = false)
     private RecipeEntity recipe;
 
     @Id
     @OneToOne
+    @JoinColumn(name="ActiveIngredientId", nullable = false)
     private ActiveIngredientEntity ingredient;
 
     @OneToOne
+    @JoinColumn(name="CookingActionId", nullable = false)
     private CookingActionEntity action;
 }

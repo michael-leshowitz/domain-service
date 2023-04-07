@@ -23,10 +23,10 @@ public class ActiveIngredientEntity {
     private Integer quantity;
     
     @ManyToOne
-    @JoinColumn(name = "idGrocery")
+    @JoinColumn(name = "groceryId")
     private GroceryEntity grocery;
     
     @ManyToOne
-    @JoinColumn(name = "idMeasurement")
+    @JoinColumn(name = "measurementId")
     private MeasurementEntity measurement;
 }
