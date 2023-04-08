@@ -1,4 +1,4 @@
-package cookbook.domainservice.RecipeService.Entities;
+package cookbook.domainservice.recipe_service.service_impl.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,10 +10,10 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Measurement")
-public class Measurement {
+@Table(name = "Appliance")
+public class ApplianceEntity {
     @Id
-    @Column(name="idMeasurement")
+    @Column(name = "idAppliance")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
