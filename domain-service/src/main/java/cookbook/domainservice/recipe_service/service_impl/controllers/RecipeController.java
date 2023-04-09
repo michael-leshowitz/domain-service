@@ -2,6 +2,7 @@ package cookbook.domainservice.recipe_service.service_impl.controllers;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import cookbook.domainservice.recipe_service.api.models.Recipe;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = "${frontend.url}")
 @RestController
 @RequestMapping(path="/recipe")
 @RequiredArgsConstructor
