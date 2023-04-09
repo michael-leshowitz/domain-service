@@ -20,7 +20,7 @@ import lombok.Data;
 public class GroceryEntity {
     @Id
     @Column(name = "idGrocery")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

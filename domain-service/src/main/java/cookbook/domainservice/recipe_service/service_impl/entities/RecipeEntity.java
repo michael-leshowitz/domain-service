@@ -18,7 +18,7 @@ import lombok.Data;
 public class RecipeEntity {
     @Id
     @Column(name="idRecipe")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

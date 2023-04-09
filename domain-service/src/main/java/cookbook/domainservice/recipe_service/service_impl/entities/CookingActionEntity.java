@@ -18,7 +18,7 @@ import lombok.Data;
 public class CookingActionEntity {
     @Id
     @Column(name = "idCookingAction")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Integer duration_min;

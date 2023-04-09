@@ -14,7 +14,7 @@ import lombok.Data;
 public class ApplianceEntity {
     @Id
     @Column(name = "idAppliance")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

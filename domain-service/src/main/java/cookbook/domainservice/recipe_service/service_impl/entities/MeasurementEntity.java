@@ -14,7 +14,7 @@ import lombok.Data;
 public class MeasurementEntity {
     @Id
     @Column(name="idMeasurement")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
