@@ -14,4 +14,7 @@ public interface RecipeRepository extends CrudRepository<RecipeEntity, Integer> 
     @Query(value = "SELECT * FROM Recipe WHERE MATCH(name) AGAINST (?1)",
     nativeQuery = true)
     public List<RecipeEntity> fullTextByKeyword(String keyword);
+
+    // TODO: Replace with findByOrderBy... to get top rated
+    public List<RecipeEntity> findAll();
 }

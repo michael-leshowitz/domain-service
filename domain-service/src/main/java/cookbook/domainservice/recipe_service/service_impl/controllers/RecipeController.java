@@ -25,5 +25,12 @@ public class RecipeController {
     public List<Recipe> fullTextByKeyword(@RequestParam String searchText) {
         return recipeService.searchRecipesByKeyword(searchText);
     }
+
+    @GetMapping(path="/most-popular")
+    public List<Recipe> mostPopularRecipesInRange(@RequestParam String lowerBoundString, @RequestParam String upperBoundString) {
+        Integer lowerBound = Integer.parseInt(lowerBoundString);
+        Integer upperBound = Integer.parseInt(upperBoundString);
+        return recipeService.topNToMRecipes(lowerBound, upperBound);
+    }  
     
 }
