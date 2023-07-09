@@ -24,8 +24,10 @@ public class RecipeServiceImpl implements RecipeService {
     // Mapping from entity to model
     // RecipeMapper.Instance.entityToModle(...)
     public List<Recipe> topNToMRecipes(Integer lowerBound, Integer upperBound) {
-        // TODO: Replace with topNToMRecipes
-        List<RecipeEntity> sortedSubListRecipes = recipeRepository.findAll().subList(lowerBound, upperBound);
-        return recipeMapper.entityToModel(sortedSubListRecipes);
+        // TODO: Replace with topNToMRecipes        
+        List<RecipeEntity> sortedRecipeList = recipeRepository.findAll();
+        // TODO: Add error handling for case where lowerBound or upperBound are outside range of recipes in database
+        List<RecipeEntity> sortedRecipeSubList = sortedRecipeList.subList(lowerBound, upperBound);
+        return recipeMapper.entityToModel(sortedRecipeSubList);
     }
 }
