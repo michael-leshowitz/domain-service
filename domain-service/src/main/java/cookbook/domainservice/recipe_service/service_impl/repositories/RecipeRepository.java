@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.Repository;
+import org.springframework.stereotype.Repository;
 
 import cookbook.domainservice.recipe_service.service_impl.entities.RecipeEntity;
 import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeSnippetView;
 
-// @Repository
-public interface RecipeRepository extends Repository<RecipeEntity, Integer> {
+@Repository
+public interface RecipeRepository extends CrudRepository<RecipeEntity, Integer> {
     
     @Query(value = "SELECT * FROM Recipe WHERE MATCH(name) AGAINST (?1)",
     nativeQuery = true)
@@ -19,5 +19,5 @@ public interface RecipeRepository extends Repository<RecipeEntity, Integer> {
     // TODO: Replace with findByOrderBy... to get top rated
     // public List<RecipeEntity> findAll();
 
-    public List<RecipeSnippetView> findAll();
+    public List<RecipeSnippetView> findAllProjectedBy();
 }

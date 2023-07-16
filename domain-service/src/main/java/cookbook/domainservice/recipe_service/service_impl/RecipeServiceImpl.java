@@ -24,7 +24,7 @@ public class RecipeServiceImpl implements RecipeService {
     // RecipeMapper.Instance.entityToModle(...)
     public List<Recipe> topNToMRecipes(Integer lowerBound, Integer upperBound) {
         // TODO: Replace with topNToMRecipes        
-        List<RecipeSnippetView> sortedRecipeList = recipeRepository.findAll();
+        List<RecipeSnippetView> sortedRecipeList = recipeRepository.findAllProjectedBy();
         // TODO: Add error handling for case where lowerBound or upperBound are outside range of recipes in database
         List<RecipeSnippetView> sortedRecipeSubList = sortedRecipeList.subList(lowerBound, upperBound);
         return recipeMapper.projectionToModel(sortedRecipeSubList);
