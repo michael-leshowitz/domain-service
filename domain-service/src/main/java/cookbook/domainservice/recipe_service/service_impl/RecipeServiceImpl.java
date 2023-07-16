@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import cookbook.domainservice.recipe_service.api.RecipeService;
 import cookbook.domainservice.recipe_service.api.models.Recipe;
 import cookbook.domainservice.recipe_service.service_impl.entities.RecipeEntity;
+import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeSnippetView;
 import cookbook.domainservice.recipe_service.service_impl.mappers.RecipeMapper;
 import cookbook.domainservice.recipe_service.service_impl.repositories.RecipeRepository;
 import lombok.NonNull;
@@ -23,9 +24,9 @@ public class RecipeServiceImpl implements RecipeService {
     // RecipeMapper.Instance.entityToModle(...)
     public List<Recipe> topNToMRecipes(Integer lowerBound, Integer upperBound) {
         // TODO: Replace with topNToMRecipes        
-        List<RecipeEntity> sortedRecipeList = recipeRepository.findAll();
+        List<RecipeSnippetView> sortedRecipeList = recipeRepository.findAll();
         // TODO: Add error handling for case where lowerBound or upperBound are outside range of recipes in database
-        List<RecipeEntity> sortedRecipeSubList = sortedRecipeList.subList(lowerBound, upperBound);
-        return recipeMapper.entityToModel(sortedRecipeSubList);
+        List<RecipeSnippetView> sortedRecipeSubList = sortedRecipeList.subList(lowerBound, upperBound);
+        return recipeMapper.projectionToModel(sortedRecipeSubList);
     }
 }
