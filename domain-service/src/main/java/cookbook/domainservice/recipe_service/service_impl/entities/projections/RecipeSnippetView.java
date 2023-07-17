@@ -5,7 +5,7 @@ public interface RecipeSnippetView {
 
     Integer getId();
 
-    // Integer getOwner();
+    Integer getOwner();
 
     // RecipeRatingView getRating();
 }
