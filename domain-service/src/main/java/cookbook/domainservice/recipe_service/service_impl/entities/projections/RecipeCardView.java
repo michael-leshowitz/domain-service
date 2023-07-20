@@ -1,11 +1,11 @@
 package cookbook.domainservice.recipe_service.service_impl.entities.projections;
 
-public interface RecipeSnippetView {
+public interface RecipeCardView {
     String getName();
 
     Integer getId();
 
     Integer getOwner();
 
-    // RecipeRatingView getRating();
+    // Double getRating();
 }

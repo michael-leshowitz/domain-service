@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import cookbook.domainservice.recipe_service.service_impl.entities.RecipeEntity;
-import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeSnippetView;
+import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeCardView;
 
 @Repository
 public interface RecipeRepository extends CrudRepository<RecipeEntity, Integer> {
@@ -19,5 +19,5 @@ public interface RecipeRepository extends CrudRepository<RecipeEntity, Integer> 
     // TODO: Replace with findByOrderBy... to get top rated
     // public List<RecipeEntity> findAll();
 
-    public List<RecipeSnippetView> findAllProjectedBy();
+    public List<RecipeCardView> findAllProjectedBy();
 }

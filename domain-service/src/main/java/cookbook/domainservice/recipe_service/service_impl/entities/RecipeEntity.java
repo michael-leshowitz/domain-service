@@ -2,6 +2,8 @@ package cookbook.domainservice.recipe_service.service_impl.entities;
 
 import java.util.Set;
 
+import org.hibernate.annotations.Formula;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,4 +31,7 @@ public class RecipeEntity {
     @OneToMany
     @JoinColumn(name="RecipeId", nullable = false)
     private Set<ActiveRecipeIngredientEntity> steps;
+
+    // @Formula("(SELECT AVG(rating) FROM UserRatings WHERE RecipeId = id)")
+    // private Double averageRating;
 }
