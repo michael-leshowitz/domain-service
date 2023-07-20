@@ -13,4 +13,5 @@ public class Recipe {
     // TODO: Implement User services
     // private User owner;
     private Set<ActiveRecipeIngredient> steps;
+    private Double averageRating;
 }

@@ -7,5 +7,5 @@ public interface RecipeCardView {
 
     Integer getOwner();
 
-    // Double getRating();
+    Double getAverageRating();
 }

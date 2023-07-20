@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -32,6 +33,6 @@ public class RecipeEntity {
     @JoinColumn(name="RecipeId", nullable = false)
     private Set<ActiveRecipeIngredientEntity> steps;
 
-    // @Formula("(SELECT AVG(rating) FROM UserRatings WHERE RecipeId = id)")
-    // private Double averageRating;
+    @Formula("(SELECT AVG(ur.rating) FROM UserRatings ur WHERE ur.RecipeId = idRecipe)")
+    private Double averageRating;
 }
