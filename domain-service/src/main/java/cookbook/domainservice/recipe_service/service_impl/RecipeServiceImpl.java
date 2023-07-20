@@ -3,7 +3,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import cookbook.domainservice.recipe_service.api.RecipeService;
 import cookbook.domainservice.recipe_service.api.models.Recipe;
-import cookbook.domainservice.recipe_service.service_impl.entities.RecipeEntity;
 import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeCardView;
 import cookbook.domainservice.recipe_service.service_impl.mappers.RecipeMapper;
 import cookbook.domainservice.recipe_service.service_impl.repositories.RecipeRepository;
@@ -18,7 +17,7 @@ public class RecipeServiceImpl implements RecipeService {
     @NonNull private final RecipeMapper recipeMapper;
 
     public List<Recipe> searchRecipesByKeyword(String keyword) {
-        return recipeMapper.entityToModel(recipeRepository.fullTextByKeyword(keyword));
+        return recipeMapper.recipeSearchProjectionToModel(recipeRepository.fullTextByKeyword(keyword));
     }
     // Mapping from entity to model
     // RecipeMapper.Instance.entityToModle(...)
@@ -27,6 +26,6 @@ public class RecipeServiceImpl implements RecipeService {
         List<RecipeCardView> sortedRecipeList = recipeRepository.findAllProjectedBy();
         // TODO: Add error handling for case where lowerBound or upperBound are outside range of recipes in database
         List<RecipeCardView> sortedRecipeSubList = sortedRecipeList.subList(lowerBound, upperBound);
-        return recipeMapper.projectionToModel(sortedRecipeSubList);
+        return recipeMapper.recipeCardProjectionToModel(sortedRecipeSubList);
     }
 }

@@ -28,6 +28,8 @@ public class RecipeEntity {
     // TODO: Update to a one-to-one mapping once user services is implemented
     private Integer owner;
 
+    private String description;
+
     @OneToMany
     @JoinColumn(name="RecipeId", nullable = false)
     private Set<ActiveRecipeIngredientEntity> steps;
