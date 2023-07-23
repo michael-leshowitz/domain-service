@@ -25,7 +25,7 @@ public class RecipeEntity {
 
     private String name;
 
-    // TODO: Update to a one-to-one mapping once user services is implemented
+    // TODO: Update to a Many-to-one mapping once user services is implemented
     private Integer owner;
 
     private String description;

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import cookbook.domainservice.recipe_service.api.RecipeService;
 import cookbook.domainservice.recipe_service.api.models.Recipe;
 import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeCardView;
+import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeSearchResultView;
 import cookbook.domainservice.recipe_service.service_impl.mappers.RecipeMapper;
 import cookbook.domainservice.recipe_service.service_impl.repositories.RecipeRepository;
 import lombok.NonNull;
@@ -17,7 +18,9 @@ public class RecipeServiceImpl implements RecipeService {
     @NonNull private final RecipeMapper recipeMapper;
 
     public List<Recipe> searchRecipesByKeyword(String keyword) {
-        return recipeMapper.recipeSearchProjectionToModel(recipeRepository.fullTextByKeyword(keyword));
+        List<RecipeSearchResultView> projections = recipeRepository.fullTextRecipeSearchByKeyword(keyword);
+        projections.forEach(result -> System.out.println(result.getId()));
+        return recipeMapper.recipeSearchProjectionToModel(projections);
     }
     // Mapping from entity to model
     // RecipeMapper.Instance.entityToModle(...)
