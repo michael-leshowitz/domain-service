@@ -27,6 +27,7 @@ public class RecipeController {
     }
 
     @GetMapping(path="/most-popular")
+    // TODO: Change request prarm from "xXString" to "xX"
     public List<Recipe> mostPopularRecipesInRange(@RequestParam String lowerBoundString, @RequestParam String upperBoundString) {
         Integer lowerBound = Integer.parseInt(lowerBoundString);
         Integer upperBound = Integer.parseInt(upperBoundString);
