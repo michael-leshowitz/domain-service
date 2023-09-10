@@ -19,8 +19,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     public List<Recipe> searchRecipesByKeyword(String keyword) {
         List<RecipeSearchResultView> projections = recipeRepository.fullTextRecipeSearchByKeyword(keyword);
-        projections.forEach(result -> System.out.println(result.getId()));
-        // TODO: Add error handling for null
+        // projections.forEach(result -> System.out.println(result.getId()));
         return recipeMapper.recipeSearchProjectionToModel(projections);
     }
     // Mapping from entity to model

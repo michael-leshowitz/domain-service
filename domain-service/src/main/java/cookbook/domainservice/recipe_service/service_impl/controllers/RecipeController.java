@@ -23,7 +23,8 @@ public class RecipeController {
     
     @GetMapping(path="/query-by")
     public List<Recipe> fullTextByKeyword(@RequestParam String searchText) {
-        return recipeService.searchRecipesByKeyword(searchText);
+        List<Recipe> searchResult =  recipeService.searchRecipesByKeyword(searchText);
+        return searchResult;
     }
 
     @GetMapping(path="/most-popular")
