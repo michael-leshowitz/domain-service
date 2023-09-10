@@ -103,15 +103,22 @@ public class RecipeServiceImplTest {
             0,
             5.0
         );
-         RecipeCardView secondSearchRecipeCardView = createRecipeCardView(
+        RecipeCardView secondSearchRecipeCardView = createRecipeCardView(
             "Second Recipe",
             2,
+            0,
+            3.5
+        );
+        RecipeCardView thirdSearchRecipeCardView = createRecipeCardView(
+            "Third Recipe",
+            3,
             0,
             3.5
         );
         List<RecipeCardView> searchResults = new ArrayList<>();
         searchResults.add(firstSearchRecipeCardView);
         searchResults.add(secondSearchRecipeCardView);
+        searchResults.add(thirdSearchRecipeCardView);
 
         Mockito.when(recipeRepository.findAllProjectedBy())
             .thenReturn(searchResults);
@@ -137,11 +144,14 @@ public class RecipeServiceImplTest {
         Recipe expectedSecondResult = createRecipe(2, "Second Recipe", null, null, 3.5);
         List<Recipe> expectedResult = new ArrayList<>();
         expectedResult.add(expectedFirstResult);
-        expectedResult.add(expectedSecondResult);
+        expectedResult.add(expectedSecondResult); 
 
         List<Recipe> actualResult = recipeServiceImpl.topNToMRecipes(0, 2);
         assertThat(actualResult).isEqualTo(expectedResult);
     }
+    // TODO: Add test of Out of Bounds errors
+
+    // Private helper methods
 
     private RecipeCardView createRecipeCardView(String name, Integer id, Integer owner, Double rating){
         RecipeCardView card = factory.createProjection(RecipeCardView.class);
