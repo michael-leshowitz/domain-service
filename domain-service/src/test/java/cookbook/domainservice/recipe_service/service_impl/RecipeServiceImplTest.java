@@ -1,7 +1,5 @@
 package cookbook.domainservice.recipe_service.service_impl;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,25 +7,28 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-// import org.assertj.core.api.Assertions.assertThat;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
 import cookbook.domainservice.recipe_service.api.models.Recipe;
-import cookbook.domainservice.recipe_service.service_impl.entities.RecipeEntity;
 import cookbook.domainservice.recipe_service.service_impl.entities.projections.RecipeSearchResultView;
 import cookbook.domainservice.recipe_service.service_impl.mappers.RecipeMapper;
 import cookbook.domainservice.recipe_service.service_impl.repositories.RecipeRepository;
 
+@ExtendWith(MockitoExtension.class)
 public class RecipeServiceImplTest {
 
     // After test passes, check if @Mock would work better
-    private RecipeRepository recipeRepository = Mockito.mock(RecipeRepository.class);
-    private RecipeMapper recipeMapper = Mockito.mock(RecipeMapper.class);
+    @Mock
+    private RecipeRepository recipeRepository;
+    @Mock
+    private RecipeMapper recipeMapper;
 
     ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
     @Test
