@@ -6,8 +6,10 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -94,62 +96,103 @@ public class RecipeServiceImplTest {
         assertThat(actualResult).isEqualTo(expectedResult);        
     }
 
-    @Test
-    @DisplayName("Should return n to m recipes")
-    void testTopNToMRecipes() {
-        RecipeCardView firstSearchRecipeCardView = createRecipeCardView(
-            "First Recipe",
-            1,
-            0,
-            5.0
-        );
-        RecipeCardView secondSearchRecipeCardView = createRecipeCardView(
-            "Second Recipe",
-            2,
-            0,
-            3.5
-        );
-        RecipeCardView thirdSearchRecipeCardView = createRecipeCardView(
-            "Third Recipe",
-            3,
-            0,
-            3.5
-        );
-        List<RecipeCardView> searchResults = new ArrayList<>();
-        searchResults.add(firstSearchRecipeCardView);
-        searchResults.add(secondSearchRecipeCardView);
-        searchResults.add(thirdSearchRecipeCardView);
+    @Nested
+    @DisplayName("Given that there are 3 possible results")
+    class testTopNToMRecipes {
+        @BeforeEach
+        void testTopNToMRecipesSetup() {
+            RecipeCardView firstSearchRecipeCardView = createRecipeCardView(
+                "First Recipe",
+                1,
+                0,
+                5.0
+            );
+            RecipeCardView secondSearchRecipeCardView = createRecipeCardView(
+                "Second Recipe",
+                2,
+                0,
+                3.5
+            );
+            RecipeCardView thirdSearchRecipeCardView = createRecipeCardView(
+                "Third Recipe",
+                3,
+                0,
+                3.5
+            );
+            List<RecipeCardView> searchResults = new ArrayList<>();
+            searchResults.add(firstSearchRecipeCardView);
+            searchResults.add(secondSearchRecipeCardView);
+            searchResults.add(thirdSearchRecipeCardView);
 
-        Mockito.when(recipeRepository.findAllProjectedBy())
-            .thenReturn(searchResults);
-        
-        Mockito.when(recipeMapper.recipeCardProjectionToModel(Mockito.anyList())).thenAnswer(new Answer<List<Recipe>>() {
-            @Override
-            public List<Recipe> answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                List<RecipeCardView> source = (List<RecipeCardView>) args[0];
-                List<Recipe> target = new ArrayList<>();
-                for (RecipeCardView searchResult : source) {
-                    Recipe recipe = new Recipe();
-                    recipe.setId(searchResult.getId());
-                    recipe.setName(searchResult.getName());
-                    recipe.setAverageRating(searchResult.getAverageRating());                    
-                    target.add(recipe);
+            Mockito.when(recipeRepository.findAllProjectedBy())
+                .thenReturn(searchResults);
+            
+            Mockito.when(recipeMapper.recipeCardProjectionToModel(Mockito.anyList())).thenAnswer(new Answer<List<Recipe>>() {
+                @Override
+                public List<Recipe> answer(InvocationOnMock invocation) {
+                    Object[] args = invocation.getArguments();
+                    List<RecipeCardView> source = (List<RecipeCardView>) args[0];
+                    List<Recipe> target = new ArrayList<>();
+                    for (RecipeCardView searchResult : source) {
+                        Recipe recipe = new Recipe();
+                        recipe.setId(searchResult.getId());
+                        recipe.setName(searchResult.getName());
+                        recipe.setAverageRating(searchResult.getAverageRating());                    
+                        target.add(recipe);
+                    }
+                    return target;
                 }
-                return target;
-            }
-        });
+            });
+        }
 
-        Recipe expectedFirstResult = createRecipe(1, "First Recipe", null, null, 5.0);
-        Recipe expectedSecondResult = createRecipe(2, "Second Recipe", null, null, 3.5);
-        List<Recipe> expectedResult = new ArrayList<>();
-        expectedResult.add(expectedFirstResult);
-        expectedResult.add(expectedSecondResult); 
+        @Test
+        @DisplayName("Then should only return first 2 results, if that is requestd")
+        void testUpperWithinBounds() {
+            Recipe expectedFirstResult = createRecipe(1, "First Recipe", null, null, 5.0);
+            Recipe expectedSecondResult = createRecipe(2, "Second Recipe", null, null, 3.5);
+            List<Recipe> expectedResult = new ArrayList<>();
+            expectedResult.add(expectedFirstResult);
+            expectedResult.add(expectedSecondResult); 
 
-        List<Recipe> actualResult = recipeServiceImpl.topNToMRecipes(0, 2);
-        assertThat(actualResult).isEqualTo(expectedResult);
+            List<Recipe> actualResult = recipeServiceImpl.topNToMRecipes(0, 2);
+            assertThat(actualResult).isEqualTo(expectedResult);
+        }
+        
+        @Test
+        @DisplayName("Then should return all 3 if upper is greater than results")
+        void testUpperOutOfBounds() {
+            Recipe expectedFirstResult = createRecipe(1, "First Recipe", null, null, 5.0);
+            Recipe expectedSecondResult = createRecipe(2, "Second Recipe", null, null, 3.5);
+            Recipe expectedThirdResult = createRecipe(3, "Third Recipe", null, null, 3.5);
+            List<Recipe> expectedResult = new ArrayList<>();
+            expectedResult.add(expectedFirstResult);
+            expectedResult.add(expectedSecondResult);
+            expectedResult.add(expectedThirdResult); 
+
+            List<Recipe> actualResult = recipeServiceImpl.topNToMRecipes(0, 5);
+            assertThat(actualResult).isEqualTo(expectedResult);
+        }
+
+        @Test
+        @DisplayName("Then should return upto upperbound, if lower bound is negative")
+        void testLowerOutOfBounds() {
+            Recipe expectedFirstResult = createRecipe(1, "First Recipe", null, null, 5.0);
+            Recipe expectedSecondResult = createRecipe(2, "Second Recipe", null, null, 3.5);
+            List<Recipe> expectedResult = new ArrayList<>();
+            expectedResult.add(expectedFirstResult);
+            expectedResult.add(expectedSecondResult);            
+
+            List<Recipe> actualResult = recipeServiceImpl.topNToMRecipes(-3, 2);
+            assertThat(actualResult).isEqualTo(expectedResult);
+        }
     }
-    // TODO: Add test of Out of Bounds errors
+
+    @Test
+    @DisplayName("Given that I search for a lower bound greater than upper, then should thrown an index out of bounds exception")
+    void testTopNToMThrowsIndexOutOfBounds() {
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+            .isThrownBy(() -> recipeServiceImpl.topNToMRecipes(1, 0));
+    }
 
     // Private helper methods
 

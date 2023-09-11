@@ -6,5 +6,5 @@ import cookbook.domainservice.recipe_service.api.models.Recipe;
 
 public interface RecipeService {
     public List<Recipe> searchRecipesByKeyword(String keyword);
-    public List<Recipe> topNToMRecipes(Integer lowerBound, Integer upperBound);
+    public List<Recipe> topNToMRecipes(Integer lowerBound, Integer upperBound)throws IndexOutOfBoundsException;
 }
