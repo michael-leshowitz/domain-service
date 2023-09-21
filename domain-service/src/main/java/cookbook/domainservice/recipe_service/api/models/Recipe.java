@@ -12,5 +12,7 @@ public class Recipe {
     private String name;
     // TODO: Implement User services
     // private User owner;
+    private String description;
     private Set<ActiveRecipeIngredient> steps;
+    private Double averageRating;
 }

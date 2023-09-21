@@ -1,6 +1,4 @@
 package cookbook.domainservice.recipe_service.service_impl.controllers;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 // import org.springframework.context.annotation.Import;
 

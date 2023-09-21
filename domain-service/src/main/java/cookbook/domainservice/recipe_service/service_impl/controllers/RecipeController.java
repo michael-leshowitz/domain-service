@@ -23,7 +23,17 @@ public class RecipeController {
     
     @GetMapping(path="/query-by")
     public List<Recipe> fullTextByKeyword(@RequestParam String searchText) {
-        return recipeService.searchRecipesByKeyword(searchText);
+        List<Recipe> searchResult =  recipeService.searchRecipesByKeyword(searchText);
+        return searchResult;
     }
+
+    @GetMapping(path="/most-popular")
+    // TODO: Change request prarm from "xXString" to "xX"
+    public List<Recipe> mostPopularRecipesInRange(@RequestParam String lowerBoundString, @RequestParam String upperBoundString) {
+        Integer lowerBound = Integer.parseInt(lowerBoundString);
+        Integer upperBound = Integer.parseInt(upperBoundString);
+        // TODO: try-catch for index out of bounds
+        return recipeService.topNToMRecipes(lowerBound, upperBound);
+    }  
     
 }
